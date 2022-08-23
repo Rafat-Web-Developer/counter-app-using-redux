@@ -51,16 +51,23 @@ const counterReducer = (state = INITIALSTATE, action) => {
 // create store
 const STORE = Redux.createStore(counterReducer);
 
-const render = () => {
-	const currentCounterStateValue = STORE.getState();
-	COUNTER_ELEMENT.innerText = currentCounterStateValue.value.toString();
-	if(currentCounterStateValue.value <= 1){
+// check validation
+const checkValidation = (getValue) => {
+	if(getValue <= 1){
 		DECREMENT_BTN_ELEMENT.style.display = "none";
 	}else{
 		DECREMENT_BTN_ELEMENT.style.display = "inline";
 	}
+};
+
+// render method for interect with ui
+const render = () => {
+	const currentCounterStateValue = STORE.getState();
+	COUNTER_ELEMENT.innerText = currentCounterStateValue.value.toString();
+	checkValidation(currentCounterStateValue.value);
 }
 render();
+
 // subscriber
 STORE.subscribe(render);
 
