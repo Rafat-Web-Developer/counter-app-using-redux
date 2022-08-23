@@ -54,6 +54,11 @@ const STORE = Redux.createStore(counterReducer);
 const render = () => {
 	const currentCounterStateValue = STORE.getState();
 	COUNTER_ELEMENT.innerText = currentCounterStateValue.value.toString();
+	if(currentCounterStateValue.value <= 1){
+		DECREMENT_BTN_ELEMENT.style.display = "none";
+	}else{
+		DECREMENT_BTN_ELEMENT.style.display = "inline";
+	}
 }
 render();
 // subscriber
