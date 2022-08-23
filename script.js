@@ -13,7 +13,19 @@ const INITIALSTATE = {
 	value: 0
 };
 
-
+// action creator
+const incrementCounterValue = (payloadValue) => {
+	return {
+		type: INCREMENT,
+		payload: payloadValue
+	}
+};
+const decrementCounterValue = (payloadValue) => {
+	return {
+		type: DECREMENT,
+		payload: payloadValue
+	}
+};
 
 
 // reducer
@@ -22,13 +34,13 @@ const counterReducer = (state = INITIALSTATE, action) => {
 		case (INCREMENT):
 		return {
 			...state,
-			value: state.value + 1
+			value: state.value + action.payload
 		};
 
 		case (DECREMENT):
 		return {
 			...state,
-			value: state.value - 1
+			value: state.value - action.payload
 		};
 
 		default:
@@ -49,13 +61,9 @@ STORE.subscribe(render);
 
 // dispatch
 INCREMENT_BTN_ELEMENT.addEventListener("click", () => {
-	STORE.dispatch({
-		type: INCREMENT
-	});
+	STORE.dispatch(incrementCounterValue(5));
 });
 
 DECREMENT_BTN_ELEMENT.addEventListener("click", () => {
-	STORE.dispatch({
-		type: DECREMENT
-	});
+	STORE.dispatch(decrementCounterValue(2));
 });
